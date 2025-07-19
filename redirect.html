@@ -4,6 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinkedIn OAuth Redirect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h2 {
+      color: #0073b1;
+    }
+    #message {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
   <h2>LinkedIn Authorization Complete</h2>
@@ -13,17 +33,23 @@
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
     const state = params.get("state");
+    const error = params.get("error");
 
     if (code) {
-      document.getElementById("message").innerText =
-        "Authorization Code: " + code;
+      document.getElementById("message").innerHTML =
+        "✅ Success! Copy your authorization code:<br><br><code>" + code + "</code><br><br>" +
+        "<small>Use this code to request an access token.</small>";
       console.log("Authorization Code:", code);
+    } else if (error) {
+      document.getElementById("message").innerText =
+        "❌ Error: " + error;
     } else {
       document.getElementById("message").innerText =
-        "No code found. Something went wrong.";
+        "No code found. Make sure LinkedIn redirected you here with ?code=...";
     }
   </script>
 </body>
 </html>
+
 
 
