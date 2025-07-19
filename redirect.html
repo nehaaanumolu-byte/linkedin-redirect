@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn OAuth Redirect</title>
+</head>
+<body>
+  <h2>LinkedIn Authorization Complete</h2>
+  <p id="message">Extracting your authorization code...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const state = params.get("state");
+
+    if (code) {
+      document.getElementById("message").innerText =
+        "Authorization Code: " + code;
+      console.log("Authorization Code:", code);
+    } else {
+      document.getElementById("message").innerText =
+        "No code found. Something went wrong.";
+    }
+  </script>
+</body>
+</html>
+
+
